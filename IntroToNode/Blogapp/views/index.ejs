@@ -2,19 +2,48 @@
 <% include partials/header %>
 <h1>Index Page</h1>
 
-<% blogs.forEach(function(blog){ %>
-	<li><%= blog.title %></li>
-	<% if (blog.body != null) { %>
-     <li><%= blog.body.substring(0, 50) %>...</li>
-	<!-- where the substring method will limit the characters from 0 up until 100 -->
-     <% }else{ %>
-     	<%= blog.body = ""; %>
-     <% } %>
 
 
+
+
+<div class="ui main text container"> 
+	<div class="ui huge header">Nodejs Blog</div> 
+	<div class="ui top attached segment">
+		<div class="ui divided items"></div>
+
+			<% blogs.forEach(function(blog){ %>
+				<div class="item">
+				<div class="image">
+					<img src="<%= blog.image %>">
+
+				</div>
+				<div class="content">
+						<a href="blogs/<%= blog._id%>"><%= blog.title %></a>
+						<div class="meta">
+							<span><%= blog.created.toDateString() %></span>
+						</div>
+						<div class="description">
+							
+							<% if (blog.body != null) { %>
+							     <%- blog.body.substring(0, 50) %> &nbsp&nbsp...
+								<!-- where the substring method will limit the characters from 0 up until 100 -->
+							     <% }else{ %>
+							     	<%= blog.body = ""; %>
+			     			<% } %>
+
+					
+						</div>
+						<div class="extra">
+							<a href="blogs/<%= blog._id%>" class= "ui floated basic orange button" >Read me!
+							<i class="right chevron icon"></i>
+							</a>	
+						</div>
+			
+						</div>
+				</div>
+				<% }); %>
+	</div>
 	
-	<img src="<%= blog.image %>">
-	<a href="blogs/<%= blog._id%>">Read me!</a>
-<% }); %>
+</div>
 
 <% include partials/footer %>

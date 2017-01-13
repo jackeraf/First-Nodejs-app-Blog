@@ -5,24 +5,24 @@
 
 	<div class="ui top attached segment">
 		<div class="item">
-		<img class="ui centered rounded image" src="<%= blog.image %>"> 
-		<div class="content">
-			<span><%= blog.created.toDateString() %></span>
+			<img class="ui centered rounded image" src="<%= blog.image %>"> 
+			<div class="content">
+				<span><%= blog.created.toDateString() %></span>
+			</div>
+			<div class="description">
+				<%- blog.body %>
+				<!-- by having the dash sign above instead of the equal -->
+			</div>
 		</div>
-		<div class="description">
-			<%- blog.body %>
-			<!-- by having the dash sign above instead of the equal -->
-		</div>
-		</div>
-		</div>
-
-		<a href="/blogs/<%= blog._id %>/edit"  class="ui orange basic button">Edit</a>
-		<form  id="show_buttons" class= "ui form" action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
-		<button class="ui red basic button">Delete</button>
-		</form>
-		
 	</div>
 
+	<a href="/blogs/<%= blog._id %>/edit"  class="ui orange basic button">Edit</a>
+	<form  id="show_buttons" class= "ui form" action="/blogs/<%= blog._id %>?_method=DELETE" method="POST">
+		<button class="ui red basic button">Delete</button>
+	</form>
+	
+</div>
 
 
-	<% include partials/footer %>
+
+<% include partials/footer %>

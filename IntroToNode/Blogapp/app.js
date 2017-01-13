@@ -3,7 +3,8 @@ var bodyParser= require("body-parser"),
 mongoose =		require ("mongoose"),
 express =		require("express"),
 app =			express(),
-methodOverride =	require("method-override");
+methodOverride =	require("method-override"),
+expressSanitizer =	require("express-sanitizer");
 
 
 var path = require('path');
@@ -15,6 +16,9 @@ mongoose.connect("mongodb://localhost/restful_app");
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(expressSanitizer());
+// the express sanitizer should go after the body parser
+
 
 
 // MONGOOSE/MODEL CONFIG
@@ -50,6 +54,8 @@ app.get("/blogs", function(req, res){
 
 app.post("/blogs", function(req, res){
 
+	console.log(req.body)
+	req.body.blog.body = req.sanitize(req.body.blog.body)
 	console.log(req.body)
 
 	Blog.create(req.body.blog, function(err, blogs){
@@ -95,11 +101,12 @@ app.get("/blogs/:id", function(req, res){
 // UPDATE ROUTE
 app.put("/blogs/:id", function(req, res){
  // res.send("SHOW PAGE!");
+ req.body.blog.body = req.sanitize(req.body.blog.body)
  Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog){ 
  	if(err){
  		res.redirect("/blogs");
  	} else {
- 		res.redirect("/blogs" + req.params.id);
+ 		res.redirect("/blogs/" + req.params.id);
  	}
  });
  });

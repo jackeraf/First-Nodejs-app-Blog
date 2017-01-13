@@ -10,3 +10,7 @@ i.icon{
 #show_buttons{
 	display: inline;
 }
+
+img {
+    width: 100%;
+}
