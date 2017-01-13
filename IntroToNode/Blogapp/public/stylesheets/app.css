@@ -1,0 +1,12 @@
+i.icon{
+	font-size: 2em!important;
+	/*which will double the current size*/
+}
+
+.ui.text.container{
+	margin-top: 100px;
+}
+
+#show_buttons{
+	display: inline;
+}

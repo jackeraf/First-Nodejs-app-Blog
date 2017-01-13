@@ -1,0 +1,20 @@
+
+<% include partials/header %>
+<h1>Index Page</h1>
+
+<% blogs.forEach(function(blog){ %>
+	<li><%= blog.title %></li>
+	<% if (blog.body != null) { %>
+     <li><%= blog.body.substring(0, 50) %>...</li>
+	<!-- where the substring method will limit the characters from 0 up until 100 -->
+     <% }else{ %>
+     	<%= blog.body = ""; %>
+     <% } %>
+
+
+	
+	<img src="<%= blog.image %>">
+	<a href="blogs/<%= blog._id%>">Read me!</a>
+<% }); %>
+
+<% include partials/footer %>
